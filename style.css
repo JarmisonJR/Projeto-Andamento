@@ -810,71 +810,46 @@ select {
 
 /* --- ADAPTAÇÃO PARA CELULAR (TOP NAV) --- */
 /* --- RESET PARA MOBILE (FORÇAR TOPO) --- */
-/* --- COMPACTAÇÃO PARA CELULAR --- */
+/* --- AJUSTE EXCLUSIVO PARA O MENU SUPERIOR --- */
 @media (max-width: 768px) {
-    body {
-        /* Permite a rolagem total para ver até o último horário */
-        overflow-y: auto !important; 
-        height: auto !important;
-    }
-
-    #app-content {
-        flex-direction: column !important;
-        gap: 0 !important;
-    }
-
     .sidebar {
         width: 100% !important;
-        height: auto !important;
-        padding: 0.8rem !important; /* Reduzido de 2rem para 0.8rem */
-        border-bottom: 1px solid var(--border);
+        padding: 0.5rem !important; /* Reduz drasticamente o espaço interno da caixa */
+        min-height: auto !important;
+        background: transparent !important; /* Remove o fundo escuro pesado se desejar */
     }
 
     .nav-header {
-        margin-bottom: 0.8rem !important; /* Espaço entre título e botões reduzido */
-        text-align: center;
+        margin-bottom: 0.5rem !important; /* Aproxima o título dos botões */
+        font-size: 1.1rem !important;
     }
 
     .nav-links {
         display: flex !important;
-        flex-direction: row !important;
+        flex-direction: row !important; /* Alinha em linha para economizar altura */
         flex-wrap: wrap;
         justify-content: center;
-        gap: 6px !important; /* Espaço mínimo entre botões */
-        margin-bottom: 5px !important;
+        gap: 6px !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .nav-links li {
-        padding: 6px 10px !important; /* Botões mais finos */
+        /* Remove o fundo gigante e transforma em botões pequenos */
+        background: var(--card-dark) !important; 
+        padding: 6px 10px !important; 
         margin: 0 !important;
-        background: var(--bg-dark);
-        font-size: 0.75rem !important;
-        flex: 1 1 auto;
+        border-radius: 6px !important;
+        font-size: 0.8rem !important;
+        flex: 1 1 auto; /* Faz os botões dividirem a largura */
         min-width: fit-content;
+        border: 1px solid var(--border);
+        height: auto !important; /* Remove qualquer altura fixa anterior */
     }
 
-    .main-viewport {
-        padding: 0.8rem !important; /* Reduz o recuo lateral do conteúdo */
-        height: auto !important;
-        overflow: visible !important;
-        /* Espaço de respiro no final para o último horário aparecer */
-        padding-bottom: 60px !important; 
-    }
-
-    .dashboard-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 8px !important; /* Cards mais próximos */
+    .logout-btn {
         margin-top: 10px !important;
-    }
-
-    .stat-card {
-        padding: 1rem !important; /* Cards menores para ocupar menos tela */
-    }
-
-    /* Compacta a tabela de horários */
-    table th, table td {
-        padding: 8px !important; 
-        font-size: 0.85rem !important;
+        padding: 5px 10px !important;
+        font-size: 0.75rem !important;
     }
 }
