@@ -19,11 +19,11 @@
                 </div>
                 <div class="form-group">
                     <label>E-mail</label>
-                    <input type="email" id="login-email" class="auth-input" placeholder="nome@gmail.com">
+                    <input type="email" id="login-email" class="auth-input" placeholder="seu-email@gmail.com" required>
                 </div>
                 <div class="form-group">
                     <label>Senha</label>
-                    <input type="password" id="login-pass" class="auth-input" placeholder="••••••••">
+                    <input type="password" id="login-pass" class="auth-input" placeholder="••••••••" required>
                 </div>
                 <button class="btn-primary" onclick="handleLogin()">Entrar no Sistema</button>
                 <p class="auth-switch">Novo por aqui? <a href="javascript:void(0)" onclick="toggleAuth('signup')">Crie uma conta</a></p>
@@ -33,12 +33,22 @@
                 <div class="auth-brand">
                     <div class="logo-icon">✨</div>
                     <h1>Cadastro</h1>
+                    <p>Crie sua conta administrativa</p>
                 </div>
-                <div class="form-group"><label>Nome</label><input type="text" id="reg-nome" class="auth-input"></div>
-                <div class="form-group"><label>E-mail</label><input type="email" id="reg-email" class="auth-input"></div>
-                <div class="form-group"><label>Senha</label><input type="password" id="reg-pass" class="auth-input"></div>
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="reg-nome" class="auth-input" placeholder="Ex: Prof. Silva">
+                </div>
+                <div class="form-group">
+                    <label>E-mail (@gmail.com)</label>
+                    <input type="email" id="reg-email" class="auth-input" placeholder="exemplo@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label>Senha (mín. 6 caracteres)</label>
+                    <input type="password" id="reg-pass" class="auth-input" placeholder="••••••••">
+                </div>
                 <button class="btn-primary" onclick="handleSignup()">Finalizar Cadastro</button>
-                <p class="auth-switch">Já tem conta? <a href="javascript:void(0)" onclick="toggleAuth('login')">Login</a></p>
+                <p class="auth-switch">Já tem conta? <a href="javascript:void(0)" onclick="toggleAuth('login')">Fazer Login</a></p>
             </div>
         </div>
     </div>
@@ -47,55 +57,54 @@
         <nav class="sidebar">
             <div class="nav-header">Portal <span>Escolar</span></div>
             <ul class="nav-links">
-                <li onclick="showSection('menu')">Menu Inicial</li>
-                <li onclick="showSection('cadastros')">Configurar Listas</li>
+                <li onclick="showSection('menu')">🏠 Menu Inicial</li>
+                <li onclick="showSection('monitoria')">🛡️ Escala Monitoria</li>
+                <li onclick="showSection('cadastros')">⚙️ Configurar Listas</li>
             </ul>
-            <button class="logout-btn" onclick="logout()">Sair</button>
+            <button class="logout-btn" onclick="logout()">Sair da Conta</button>
         </nav>
 
         <main class="main-viewport">
-            <div id="main-menu" class="app-section">
+            <div id="main-menu" class="app-section active">
                 <header class="section-header">
                     <h2 id="welcome-user">Olá!</h2>
-                    <p>Selecione uma área:</p>
+                    <p>Selecione uma área para gerenciar:</p>
                 </header>
                 <div class="dashboard-grid">
-                    <div class="stat-card" onclick="openLab('Lab Informática (LEI)')"><h3>LEI</h3><p>Informática</p></div>
-                    <div class="stat-card" onclick="openLab('Lab Hardware')"><h3>Hardware</h3><p>Manutenção</p></div>
-                    <div class="stat-card" onclick="openLab('Lab Multimídia')"><h3>Multimídia</h3><p>Audiovisual</p></div>
+                    <div class="stat-card" onclick="openLab('LEI')"><h3>LEI</h3><p>Informática</p></div>
+                    <div class="stat-card" onclick="openLab('Hardware')"><h3>Hardware</h3><p>Manutenção</p></div>
+                    <div class="stat-card" onclick="openLab('Multimídia')"><h3>Multimídia</h3><p>Audiovisual</p></div>
                     <div class="stat-card" onclick="showSection('monitoria')"><h3>Monitoria</h3><p>Escala de Postos</p></div>
                 </div>
             </div>
 
             <div id="sec-reservas" class="app-section">
                 <div class="section-header">
-                    <button class="back-link" onclick="showSection('menu')">← Voltar ao Menu</button>
+                    <button class="back-link" onclick="showSection('menu')">← Voltar</button>
                     <h2 id="currentLabTitle">Laboratório</h2>
                 </div>
-
                 <div class="calendar-container">
-                    <button class="btn-toggle-cal" onclick="toggleCalendarView()">📅 Abrir/Fechar Calendário e Marcações</button>
+                    <button class="btn-toggle-cal" onclick="toggleCalendarView()">📅 Agenda do Laboratório</button>
                     <div id="calendar-expandable" style="display: none;">
                         <div class="calendar-controls">
                             <div class="select-group">
-                                <label>Mês:</label>
+                                <label>Mês</label>
                                 <select id="reserva-month" onchange="generateCalendar()"></select>
                             </div>
                             <div class="select-group">
-                                <label>Ano:</label>
+                                <label>Ano</label>
                                 <select id="reserva-year" onchange="generateCalendar()"></select>
                             </div>
                         </div>
                         <div class="calendar-weekdays">
-                            <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+                            <div>DOM</div><div>SEG</div><div>TER</div><div>QUA</div><div>QUI</div><div>SEX</div><div>SÁB</div>
                         </div>
                         <div id="calendar-grid" class="calendar-grid"></div>
-                        <p class="calendar-hint">💡 Clique direito em um dia para marcar Evento/Feriado.</p>
+                        <p class="calendar-hint">Clique direito para gerenciar feriados ou eventos.</p>
                     </div>
                 </div>
-
                 <div class="table-wrapper">
-                    <h3 id="selected-date-label" class="table-date-title">Selecione uma data</h3>
+                    <h3 id="selected-date-label" class="table-date-title">Horários para: --/--/----</h3>
                     <table>
                         <thead><tr><th>Horário</th><th>Professor</th><th>Turma</th></tr></thead>
                         <tbody id="tableBody"></tbody>
@@ -105,12 +114,35 @@
 
             <div id="sec-monitoria" class="app-section">
                 <div class="section-header">
-                    <button class="back-link" onclick="showSection('menu')">← Voltar ao Menu</button>
-                    <h2>Escala de Monitoria</h2>
+                    <button class="back-link" onclick="showSection('menu')">← Voltar</button>
+                    <h2>🛡️ Escala de Monitoria</h2>
+                </div>
+                <div class="calendar-container">
+                    <div class="calendar-controls">
+                        <div class="select-group">
+                            <label>Mês</label>
+                            <select id="monitoria-month" onchange="generateMonitoriaCalendar()"></select>
+                        </div>
+                        <div class="select-group">
+                            <label>Ano</label>
+                            <select id="monitoria-year" onchange="generateMonitoriaCalendar()"></select>
+                        </div>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div>DOM</div><div>SEG</div><div>TER</div><div>QUA</div><div>QUI</div><div>SEX</div><div>SÁB</div>
+                    </div>
+                    <div id="monitoria-grid" class="calendar-grid"></div>
                 </div>
                 <div class="table-wrapper">
-                    <table id="tableMonitoria">
-                        <thead><tr><th>Posto</th><th>Monitor</th><th>Turma</th></tr></thead>
+                    <h3 id="selected-monitoria-date-label" class="schedule-title">Horários para: --/--/----</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>POSTO DE TRABALHO</th>
+                                <th>MONITOR RESPONSÁVEL</th>
+                                <th>TURMA</th>
+                            </tr>
+                        </thead>
                         <tbody id="tableBodyMonitoria"></tbody>
                     </table>
                 </div>
@@ -119,13 +151,13 @@
             <div id="sec-cadastros" class="app-section">
                 <div class="section-header">
                     <button class="back-link" onclick="showSection('menu')">← Voltar</button>
-                    <h2>Gestão de Listas</h2>
+                    <h2>⚙️ Gestão de Listas</h2>
                 </div>
                 <div class="config-grid">
                     <div class="config-card">
                         <h3>👨‍🏫 Professores</h3>
                         <div class="input-action">
-                            <input type="text" id="new-prof" placeholder="Nome">
+                            <input type="text" id="new-prof" placeholder="Nome do Professor">
                             <button onclick="cadastrarItem('professores', 'new-prof')">+</button>
                         </div>
                         <ul id="list-professores" class="data-list"></ul>
@@ -133,7 +165,7 @@
                     <div class="config-card">
                         <h3>👥 Turmas</h3>
                         <div class="input-action">
-                            <input type="text" id="new-turma" placeholder="Ex: DS1">
+                            <input type="text" id="new-turma" placeholder="Ex: 3º Ano A">
                             <button onclick="cadastrarItem('turmas', 'new-turma')">+</button>
                         </div>
                         <ul id="list-turmas" class="data-list"></ul>
@@ -141,7 +173,7 @@
                     <div class="config-card">
                         <h3>🎓 Monitores</h3>
                         <div class="input-action">
-                            <input type="text" id="new-monitor" placeholder="Nome">
+                            <input type="text" id="new-monitor" placeholder="Nome do Aluno">
                             <button onclick="cadastrarItem('monitores', 'new-monitor')">+</button>
                         </div>
                         <ul id="list-monitores" class="data-list"></ul>
@@ -151,27 +183,10 @@
         </main>
     </div>
 
-    <div id="event-modal" class="modal-overlay" style="display: none;">
-        <div class="modal-box">
-            <h3>Marcar Dia Especial</h3>
-            <p id="modal-date-display" style="color: var(--primary); font-weight: bold;"></p>
-            <div class="form-group">
-                <label>Tipo de Dia</label>
-                <select id="event-type" class="auth-input">
-                    <option value="normal">Letivo (Normal)</option>
-                    <option value="feriado">Feriado 🚩</option>
-                    <option value="evento">Evento Escolar 📅</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Descrição</label>
-                <input type="text" id="event-desc" class="auth-input" placeholder="Ex: Carnaval">
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" onclick="closeEventModal()">Cancelar</button>
-                <button class="btn-primary" style="width: auto; padding: 0.8rem 2rem;" onclick="saveEvent()">Salvar</button>
-            </div>
-        </div>
+    <div id="custom-menu" style="position: absolute; background: #1f2937; border: 1px solid #374151; border-radius: 8px; display: none; z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 160px;">
+        <div style="padding: 10px; color: white; cursor: pointer; border-bottom: 1px solid #374151;" onclick="applyStatus('feriado')">🚩 Feriado</div>
+        <div style="padding: 10px; color: white; cursor: pointer; border-bottom: 1px solid #374151;" onclick="applyStatus('evento')">📅 Evento</div>
+        <div style="padding: 10px; color: white; cursor: pointer;" onclick="applyStatus('letivo')">📖 Dia Letivo</div>
     </div>
 
     <script src="script.js"></script>
