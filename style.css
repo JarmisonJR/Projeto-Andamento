@@ -810,72 +810,73 @@ select {
 
 /* --- ADAPTAÇÃO PARA CELULAR (TOP NAV) --- */
 /* --- RESET PARA MOBILE (FORÇAR TOPO) --- */
+/* --- RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 768px) {
+    body {
+        overflow: auto; /* Permite rolar a página inteira no celular */
+    }
+
     #app-content {
-        flex-direction: column !important; /* Força o menu para cima do conteúdo */
+        flex-direction: column !important; /* Move o menu para o topo */
     }
 
     .sidebar {
-        width: 100% !important;
-        height: auto !important;
-        min-height: auto !important;
-        padding: 10px !important;
+        width: 100% !important; /* Ocupa a largura toda no topo */
+        padding: 1rem !important;
         border-right: none !important;
         border-bottom: 1px solid var(--border);
-        position: relative !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
+        align-items: center;
     }
 
     .nav-header {
-        margin-bottom: 10px !important;
-        text-align: center;
+        margin-bottom: 1rem !important;
+        font-size: 1.2rem;
     }
 
     .nav-links {
         display: flex !important;
-        flex-direction: row !important; /* Itens um ao lado do outro */
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        gap: 10px !important;
-        width: 100% !important;
-        padding: 0 !important;
+        flex-direction: row !important; /* Links um ao lado do outro */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 1rem;
     }
 
     .nav-links li {
-        margin: 0 !important;
-        padding: 10px 15px !important;
-        background-color: #2d3748 !important;
-        border-radius: 8px !important;
-        font-size: 0.8rem !important;
-        list-style: none !important;
-        cursor: pointer;
-        flex: 1 1 auto; /* Ajusta o tamanho conforme o texto */
+        padding: 0.5rem 0.8rem !important;
+        margin-bottom: 0 !important;
+        background: var(--bg-dark);
+        font-size: 0.85rem;
+        flex: 1 1 auto;
         text-align: center;
-        min-width: fit-content;
-    }
-
-    .logout-btn {
-        position: static !important; /* Tira do canto e coloca no fluxo */
-        margin-top: 10px !important;
-        width: 100% !important;
-        max-width: 200px;
     }
 
     .main-viewport {
-        padding: 15px !important;
-        width: 100% !important;
-        margin: 0 !important;
+        padding: 1rem !important;
+        height: auto !important; /* Libera a altura para o conteúdo crescer */
+        overflow-y: visible !important;
     }
 
-    /* Ajuste dos cards do Menu Inicial */
+    /* Ajuste para os cards de LEI, Hardware, etc ficarem em 2 colunas */
     .dashboard-grid {
-        grid-template-columns: 1fr 1fr !important; /* 2 colunas */
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
         gap: 10px !important;
     }
 
     .stat-card {
-        padding: 15px !important;
+        padding: 1.5rem !important;
+    }
+}
+
+/* Ajuste para telas muito pequenas (iPhone SE, etc) */
+@media (max-width: 400px) {
+    .nav-links li {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem !important;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr !important; /* 1 coluna apenas */
     }
 }
