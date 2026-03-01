@@ -808,49 +808,86 @@ select {
 
 /* --- MEDIA QUERIES (A MÁGICA DA ADAPTAÇÃO) --- */
 
-/* Celulares (Ajuste de Menu) */
-@media (max-width: 600px) {
-    .main-viewport {
-        padding: 10px;
+/* --- ADAPTAÇÃO PARA CELULAR (TOP NAV) --- */
+@media (max-width: 768px) {
+    #app-content {
+        flex-direction: column; /* Coloca o menu em cima e o conteúdo embaixo */
     }
 
     .sidebar {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        position: relative;
         padding: 10px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        display: flex;
         flex-direction: column;
-        gap: 5px; /* Diminui o espaço entre o header e o menu */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-header {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
     }
 
     .nav-links {
         display: flex;
-        flex-direction: row; /* Mantém em linha */
-        flex-wrap: wrap;    /* Quebra se não couber */
+        flex-direction: row; /* Alinha os itens lado a lado */
         justify-content: center;
-        gap: 8px;           /* Espaço reduzido entre os itens */
+        flex-wrap: wrap;
+        gap: 8px;
         width: 100%;
-        padding: 5px 0;
     }
 
     .nav-links li {
-        font-size: 0.75rem; /* Fonte levemente menor para caber melhor */
-        padding: 6px 10px;
-        background: #2d3748;
-        border-radius: 20px;
-        white-space: nowrap; /* Impede que o texto quebre em duas linhas */
+        font-size: 0.75rem;
+        padding: 8px 12px;
+        background: #2d3748; /* Fundo estilo botão */
+        border-radius: 8px;
+        margin: 0;
+        white-space: nowrap;
+        flex: 1; /* Faz os botões dividirem o espaço */
+        text-align: center;
+        min-width: 100px;
     }
 
     .logout-btn {
         width: auto;
-        padding: 5px 15px;
-        font-size: 0.75rem;
-        margin-top: 5px;
+        margin: 0;
+        padding: 6px 15px;
+        font-size: 0.7rem;
+        position: absolute; /* Opcional: coloca o sair no cantinho */
+        right: 10px;
+        top: 10px;
     }
 
-    /* Ajuste extra para os cards não ficarem gigantes no celular */
+    .main-viewport {
+        padding: 15px;
+        width: 100%;
+    }
+
+    /* Ajuste dos cards para não ficarem gigantes */
     .dashboard-grid {
+        grid-template-columns: 1fr 1fr; /* 2 colunas no celular */
         gap: 10px;
     }
-    
+
     .stat-card {
         padding: 15px;
+        text-align: center;
+    }
+
+    .stat-card h3 { font-size: 1.1rem; }
+}
+
+/* Para celulares muito pequenos */
+@media (max-width: 400px) {
+    .nav-links li {
+        font-size: 0.7rem;
+        padding: 6px 8px;
+        min-width: 80px;
     }
 }
