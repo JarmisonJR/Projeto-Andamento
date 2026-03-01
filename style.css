@@ -808,69 +808,49 @@ select {
 
 /* --- MEDIA QUERIES (A MÁGICA DA ADAPTAÇÃO) --- */
 
-/* Tablets e Celulares Grandes */
-@media (max-width: 992px) {
-    #app-content {
-        flex-direction: column; /* Sidebar vai para cima ou vira menu */
+/* Celulares (Ajuste de Menu) */
+@media (max-width: 600px) {
+    .main-viewport {
+        padding: 10px;
     }
 
     .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 15px;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        padding: 10px;
+        flex-direction: column;
+        gap: 5px; /* Diminui o espaço entre o header e o menu */
     }
 
     .nav-links {
         display: flex;
-        gap: 15px;
+        flex-direction: row; /* Mantém em linha */
+        flex-wrap: wrap;    /* Quebra se não couber */
+        justify-content: center;
+        gap: 8px;           /* Espaço reduzido entre os itens */
+        width: 100%;
+        padding: 5px 0;
     }
 
     .nav-links li {
-        font-size: 0.85rem;
-        margin: 0;
+        font-size: 0.75rem; /* Fonte levemente menor para caber melhor */
+        padding: 6px 10px;
+        background: #2d3748;
+        border-radius: 20px;
+        white-space: nowrap; /* Impede que o texto quebre em duas linhas */
     }
 
     .logout-btn {
-        padding: 8px 12px;
-        margin: 0;
+        width: auto;
+        padding: 5px 15px;
+        font-size: 0.75rem;
+        margin-top: 5px;
     }
-}
 
-/* Celulares (Small Devices) */
-@media (max-width: 600px) {
-    .main-viewport {
+    /* Ajuste extra para os cards não ficarem gigantes no celular */
+    .dashboard-grid {
+        gap: 10px;
+    }
+    
+    .stat-card {
         padding: 15px;
-    }
-
-    .sidebar {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .nav-links {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        width: 100%;
-    }
-
-    .calendar-controls {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .calendar-day {
-        font-size: 0.7rem;
-    }
-
-    .day-label {
-        display: none; /* Esconde texto longo nos dias do calendário no celular */
-    }
-
-    .section-header h2 {
-        font-size: 1.2rem;
     }
 }
