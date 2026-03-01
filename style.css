@@ -447,3 +447,210 @@ td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); }
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+
+.app-section { display: none; }
+.app-section.active { display: block; }
+.data-list li { 
+    display: flex; 
+    justify-content: space-between; 
+    padding: 5px; 
+    border-bottom: 1px solid #eee; 
+}
+
+.app-section {
+    display: none; /* Esconde todas as seções */
+}
+
+.app-section.active {
+    display: block; /* Mostra apenas a que tiver a classe active */
+}
+/* Container Principal do Calendário */
+.agenda-container {
+    background-color: #111827; /* Fundo escuro profundo */
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    max-width: 600px; /* Diminui a largura total */
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+/* Título e Labels */
+.agenda-header {
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Inputs de Mês e Ano */
+input, select {
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    width: 100%;
+}
+
+/* Grid do Calendário */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px; /* Espaçamento menor */
+    margin-top: 20px;
+}
+
+/* Dias Individuais */
+.day-cell {
+    background-color: #1f2937; /* Cinza azulado escuro */
+    border: 1px solid #374151;
+    aspect-ratio: 1 / 1; /* Mantém quadradinho */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.day-cell:hover {
+    background-color: #374151;
+}
+
+/* Dia Selecionado (Destaque Azul) */
+.day-cell.active {
+    background-color: #3b82f6; /* Azul vibrante da imagem */
+    border-color: #60a5fa;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* Dias Vazios ou de outro mês */
+.day-cell.empty {
+    background: transparent;
+    border: none;
+    opacity: 0.3;
+}
+/* Seleção com botão esquerdo */
+.calendar-day.selected {
+    background-color: #3b82f6 !important; /* O azul das suas imagens */
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Estilos de personalização (Botão direito) */
+.status-feriado {
+    border-left: 5px solid #ef4444 !important; /* Vermelho */
+    background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+.status-evento {
+    border-left: 5px solid #a855f7 !important; /* Roxo */
+    background-color: rgba(168, 85, 247, 0.1) !important;
+}
+
+/* Ajuste o tamanho do calendário para ser menor como pediu */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 450px; /* Reduz o tamanho total */
+    margin: 0 auto;
+}
+
+.calendar-day {
+    padding: 8px;
+    font-size: 0.85rem;
+    min-height: 40px;
+    /* ... seus outros estilos de borda e cor ... */
+}
+/* Container dos dias da semana */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 colunas iguais */
+    text-align: center;
+    font-weight: bold;
+    color: #10b981; /* Verde esmeralda das suas imagens */
+    margin-bottom: 10px;
+}
+
+/* Grid de números */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Mesmas 7 colunas */
+    gap: 8px;
+    max-width: 100%;
+}
+
+/* Estilo para as células vazias (para alinhar o dia 1 ao dia da semana correto) */
+.calendar-day.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+.calendar-day {
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Coloca o número em cima e o texto embaixo */
+    align-items: center;
+    justify-content: center;
+    min-height: 60px; /* Aumentamos um pouco para caber o texto */
+    padding: 5px;
+}
+
+.day-label {
+    font-size: 10px;
+    color: #cbd5e1;
+    text-align: center;
+    margin-top: 4px;
+    line-height: 1;
+    display: block;
+    max-width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
+}
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 colunas iguais obrigatoriamente */
+    gap: 8px;
+    background: #111827;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.calendar-day {
+    aspect-ratio: 1 / 1; /* Garante que os dias sejam quadrados */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.calendar-day span {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Esconde as bordas das células vazias */
+.calendar-day.empty {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+.schedule-title {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-left: 5px;
+    border-left: 4px solid #10b981; /* Verde esmeralda para combinar com seu tema */
+}
