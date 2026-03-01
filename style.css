@@ -810,25 +810,29 @@ select {
 
 /* --- ADAPTAÇÃO PARA CELULAR (TOP NAV) --- */
 /* --- RESET PARA MOBILE (FORÇAR TOPO) --- */
-/* --- RESPONSIVIDADE (MOBILE) --- */
+/* --- COMPACTAÇÃO PARA CELULAR --- */
 @media (max-width: 768px) {
     body {
-        /* Remove o bloqueio de rolagem para permitir ver o final da lista */
-        overflow: auto !important; 
+        /* Permite a rolagem total para ver até o último horário */
+        overflow-y: auto !important; 
         height: auto !important;
     }
 
     #app-content {
         flex-direction: column !important;
+        gap: 0 !important;
     }
 
     .sidebar {
         width: 100% !important;
         height: auto !important;
-        padding: 1rem !important;
-        border-right: none !important;
+        padding: 0.8rem !important; /* Reduzido de 2rem para 0.8rem */
         border-bottom: 1px solid var(--border);
-        position: relative !important;
+    }
+
+    .nav-header {
+        margin-bottom: 0.8rem !important; /* Espaço entre título e botões reduzido */
+        text-align: center;
     }
 
     .nav-links {
@@ -836,35 +840,41 @@ select {
         flex-direction: row !important;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 8px;
+        gap: 6px !important; /* Espaço mínimo entre botões */
+        margin-bottom: 5px !important;
     }
 
     .nav-links li {
-        padding: 8px 12px !important;
+        padding: 6px 10px !important; /* Botões mais finos */
         margin: 0 !important;
         background: var(--bg-dark);
-        font-size: 0.8rem;
+        font-size: 0.75rem !important;
         flex: 1 1 auto;
-        text-align: center;
+        min-width: fit-content;
     }
 
     .main-viewport {
-        padding: 1rem !important;
-        /* Ajuste crucial: remove a altura fixa que escondia o final da tabela */
-        height: auto !important; 
-        overflow-y: visible !important;
-        /* Adiciona um espaço no fim para o último horário não colar na borda */
-        padding-bottom: 80px !important; 
-    }
-
-    /* Garante que a tabela de horários seja legível */
-    .table-wrapper {
-        margin-bottom: 20px;
-        overflow-x: auto; /* Permite deslizar a tabela pro lado se for larga */
+        padding: 0.8rem !important; /* Reduz o recuo lateral do conteúdo */
+        height: auto !important;
+        overflow: visible !important;
+        /* Espaço de respiro no final para o último horário aparecer */
+        padding-bottom: 60px !important; 
     }
 
     .dashboard-grid {
+        display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 10px !important;
+        gap: 8px !important; /* Cards mais próximos */
+        margin-top: 10px !important;
+    }
+
+    .stat-card {
+        padding: 1rem !important; /* Cards menores para ocupar menos tela */
+    }
+
+    /* Compacta a tabela de horários */
+    table th, table td {
+        padding: 8px !important; 
+        font-size: 0.85rem !important;
     }
 }
