@@ -5,17 +5,29 @@ let currentLab = "";
 let selectedDate = new Date().toISOString().split('T')[0];
 let dayToCustomize = null;
 
+// Novos postos desejados
+const novosPostos = [
+    { posto: "Fila (manhã)" },
+    { posto: "Sucos (almoço)" },
+    { posto: "Fila (almoço)" },
+    { posto: "Liberar salas (Almoço)" },
+    { posto: "Fila (Tarde)" }
+];
+
+// Carrega o banco ou cria um novo
 let db = JSON.parse(localStorage.getItem('portalEscolarDB')) || {
     professores: [],
     turmas: [],
     monitores: [],
-    monitoriaEscala: [
-        { posto: "Entrada Principal" },
-        { posto: "Laboratório LEI" },
-        { posto: "Pátio Central" },
-        { posto: "Biblioteca" }
-    ]
+    monitoriaEscala: novosPostos
 };
+
+// --- CORREÇÃO FORÇADA DE NOMES ---
+// Verifica se o primeiro posto ainda é o antigo "Entrada Principal"
+if (db.monitoriaEscala[0].posto === "Entrada Principal" || db.monitoriaEscala.length !== 5) {
+    db.monitoriaEscala = novosPostos;
+    localStorage.setItem('portalEscolarDB', JSON.stringify(db));
+}
 
 const saveDB = () => localStorage.setItem('portalEscolarDB', JSON.stringify(db));
 
@@ -63,9 +75,10 @@ function initCalendarControls(prefix) {
 
 function generateCalendarGeneric(gridId, monthId, yearId) {
     const grid = document.getElementById(gridId);
+    if (!grid) return;
+    
     const month = parseInt(document.getElementById(monthId).value);
     const year = parseInt(document.getElementById(yearId).value);
-    if (!grid) return;
     grid.innerHTML = '';
 
     const firstDay = new Date(year, month, 1).getDay();
@@ -246,3 +259,8 @@ function toggleCalendarView() {
 function logout() { location.reload(); }
 
 window.onclick = (e) => { if (!e.target.closest('#custom-menu')) document.getElementById('custom-menu').style.display = 'none'; };
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Força a tela de login inicial
+    if(document.getElementById('auth-screen')) document.getElementById('auth-screen').classList.add('active');
+});
