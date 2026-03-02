@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Gestão Escolar v3.0</title>
-   <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -66,26 +66,39 @@
 
         <main class="main-viewport">
             <div id="main-menu" class="app-section active">
-                <header class="section-header">
+                <header class="section-header" style="text-align: center; margin-bottom: 2rem;">
                     <h2 id="welcome-user">Olá!</h2>
-                    <p>Selecione uma área para gerenciar:</p>
+                    <p style="color: var(--text-dim);">Selecione uma área para gerenciar:</p>
                 </header>
                 <div class="dashboard-grid">
-                    <div class="stat-card" onclick="openLab('LEI')"><h3>LEI</h3><p>Informática</p></div>
-                    <div class="stat-card" onclick="openLab('Hardware')"><h3>Hardware</h3><p>Manutenção</p></div>
-                    <div class="stat-card" onclick="openLab('Multimídia')"><h3>Multimídia</h3><p>Audiovisual</p></div>
-                    <div class="stat-card" onclick="showSection('monitoria')"><h3>Monitoria</h3><p>Escala de Postos</p></div>
+                    <div class="stat-card" onclick="openLab('LEI')">
+                        <h3>LEI</h3>
+                        <p>Informática</p>
+                    </div>
+                    <div class="stat-card" onclick="openLab('Hardware')">
+                        <h3>Hardware</h3>
+                        <p>Manutenção</p>
+                    </div>
+                    <div class="stat-card" onclick="openLab('Multimídia')">
+                        <h3>Multimídia</h3>
+                        <p>Audiovisual</p>
+                    </div>
+                    <div class="stat-card" onclick="showSection('monitoria')">
+                        <h3>Monitoria</h3>
+                        <p>Escala de Postos</p>
+                    </div>
                 </div>
             </div>
 
             <div id="sec-reservas" class="app-section">
                 <div class="section-header">
-                    <button class="back-link" onclick="showSection('menu')">← Voltar</button>
+                    <button class="back-link" onclick="showSection('menu')">← Voltar ao Menu</button>
                     <h2 id="currentLabTitle">Laboratório</h2>
                 </div>
+                
                 <div class="calendar-container">
-                    <button class="btn-toggle-cal" onclick="toggleCalendarView()">📅 Agenda do Laboratório</button>
-                    <div id="calendar-expandable" style="display: none;">
+                    <button class="btn-toggle-cal" onclick="toggleCalendarView()">📅 Ver Agenda Completa</button>
+                    <div id="calendar-expandable" style="display: none; margin-top: 15px;">
                         <div class="calendar-controls">
                             <div class="select-group">
                                 <label>Mês</label>
@@ -100,11 +113,12 @@
                             <div>DOM</div><div>SEG</div><div>TER</div><div>QUA</div><div>QUI</div><div>SEX</div><div>SÁB</div>
                         </div>
                         <div id="calendar-grid" class="calendar-grid"></div>
-                        <p class="calendar-hint">Clique direito para gerenciar feriados ou eventos.</p>
+                        <p class="calendar-hint">💡 Botão direito no dia para marcar Feriado ou Evento.</p>
                     </div>
                 </div>
+
                 <div class="table-wrapper">
-                    <h3 id="selected-date-label" class="table-date-title">Horários para: --/--/----</h3>
+                    <h3 id="selected-date-label" class="schedule-title">Horários para: --/--/----</h3>
                     <table>
                         <thead><tr><th>Horário</th><th>Professor</th><th>Turma</th></tr></thead>
                         <tbody id="tableBody"></tbody>
@@ -114,9 +128,10 @@
 
             <div id="sec-monitoria" class="app-section">
                 <div class="section-header">
-                    <button class="back-link" onclick="showSection('menu')">← Voltar</button>
+                    <button class="back-link" onclick="showSection('menu')">← Voltar ao Menu</button>
                     <h2>🛡️ Escala de Monitoria</h2>
                 </div>
+                
                 <div class="calendar-container">
                     <div class="calendar-controls">
                         <div class="select-group">
@@ -133,6 +148,7 @@
                     </div>
                     <div id="monitoria-grid" class="calendar-grid"></div>
                 </div>
+
                 <div class="table-wrapper">
                     <h3 id="selected-monitoria-date-label" class="schedule-title">Horários para: --/--/----</h3>
                     <table>
