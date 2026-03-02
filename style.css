@@ -810,52 +810,46 @@ select {
 
 /* --- ADAPTAÇÃO PARA CELULAR (TOP NAV) --- */
 /* --- RESET PARA MOBILE (FORÇAR TOPO) --- */
-/* --- COMPACTAÇÃO TOTAL DO MENU (MOBILE) --- */
+/* --- COMPACTAÇÃO TOTAL DO MENU (MOBILE) --- /* --- AJUSTE EXCLUSIVO PARA O MENU SUPERIOR --- */
 @media (max-width: 768px) {
     .sidebar {
         width: 100% !important;
-        padding: 0.5rem !important; /* Diminui o recuo interno do topo */
+        padding: 0.5rem !important; /* Reduz drasticamente o espaço interno da caixa */
         min-height: auto !important;
-        border-right: none !important;
-        background: transparent !important; /* Remove o fundo pesado da lateral */
+        background: transparent !important; /* Remove o fundo escuro pesado se desejar */
     }
 
     .nav-header {
-        margin-bottom: 0.5rem !important; /* Cola o título nos botões */
-        text-align: center;
+        margin-bottom: 0.5rem !important; /* Aproxima o título dos botões */
+        font-size: 1.1rem !important;
     }
 
     .nav-links {
         display: flex !important;
-        flex-direction: row !important; /* Alinha tudo horizontalmente */
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        gap: 6px !important; /* Espaço mínimo entre os botões */
-        padding: 0 !important;
+        flex-direction: row !important; /* Alinha em linha para economizar altura */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px !important;
         margin: 0 !important;
+        padding: 0 !important;
     }
 
     .nav-links li {
-        /* Transforma a lista em botões compactos sem fundo gigante */
-        background: var(--card-dark) !important;
-        padding: 6px 12px !important;
+        /* Remove o fundo gigante e transforma em botões pequenos */
+        background: var(--card-dark) !important; 
+        padding: 6px 10px !important; 
         margin: 0 !important;
         border-radius: 6px !important;
-        font-size: 0.75rem !important;
-        list-style: none !important;
-        flex: 0 1 auto !important; /* Impede que eles cresçam e criem brechas */
-        text-align: center;
+        font-size: 0.8rem !important;
+        flex: 1 1 auto; /* Faz os botões dividirem a largura */
+        min-width: fit-content;
         border: 1px solid var(--border);
+        height: auto !important; /* Remove qualquer altura fixa anterior */
     }
 
-    .main-viewport {
-        padding: 0.5rem !important; /* Reduz o espaço nas laterais do conteúdo principal */
-        margin-top: 0 !important;
-    }
-
-    /* Remove espaços vazios que sobravam no dashboard */
-    .dashboard-grid {
-        margin-top: 5px !important;
-        gap: 10px !important;
+    .logout-btn {
+        margin-top: 10px !important;
+        padding: 5px 10px !important;
+        font-size: 0.75rem !important;
     }
 }
