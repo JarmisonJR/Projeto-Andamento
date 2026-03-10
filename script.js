@@ -264,3 +264,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Força a tela de login inicial
     if(document.getElementById('auth-screen')) document.getElementById('auth-screen').classList.add('active');
 });
+
+dayEl.innerHTML = `<span>${d}</span>`; // Número do dia
+if (mark) {
+    dayEl.classList.add(`status-${mark.type}`);
+    // Use a classe .day-label que configuramos acima
+    dayEl.innerHTML += `<span class="day-label">${mark.desc}</span>`; 
+}
