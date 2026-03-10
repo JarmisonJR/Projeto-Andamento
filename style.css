@@ -1500,3 +1500,88 @@ td { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); }
     background: transparent;
     cursor: default;
 }
+
+/* 1. Trava o Grid para nunca perder o formato */
+.calendar-grid {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important; /* Força 7 colunas iguais sempre */
+    gap: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 2. Ajusta o Quadrado do Dia */
+.calendar-day {
+    aspect-ratio: 1 / 1; /* Mantém sempre quadrado */
+    width: 100%;
+    position: relative; /* Para posicionar o texto do evento */
+    display: flex;
+    flex-direction: column; /* Número em cima, texto embaixo */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* IMPEDE que o texto estique o quadrado */
+    padding: 2px;
+    box-sizing: border-box;
+    background-color: #252a34;
+}
+
+/* 3. Ajusta o número do dia */
+.calendar-day span:first-child {
+    font-size: 1rem;
+    font-weight: bold;
+    z-index: 2;
+}
+
+/* 4. Ajusta o texto do EVENTO/FERIADO (Onde está o erro) */
+.day-label {
+    display: block;
+    width: 90%; /* Não deixa encostar nas bordas */
+    font-size: 0.55rem; /* Fonte bem pequena para caber */
+    text-align: center;
+    white-space: nowrap; /* Não deixa quebrar linha */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adiciona "..." se o nome for muito grande */
+    text-transform: uppercase;
+    margin-top: 2px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Garante que os dias vazios também sigam a regra */
+.calendar-day.empty {
+    background: transparent;
+    pointer-events: none;
+}
+.weekly-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #1a1d23;
+    color: white;
+}
+
+.weekly-table th, .weekly-table td {
+    border: 1px solid #3f4451;
+    padding: 8px;
+    text-align: center;
+}
+
+.weekly-table th {
+    background-color: #252a34;
+    color: #2ecc71; /* Verde do seu tema */
+}
+
+.weekly-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.weekly-cell select {
+    background: #1a1d23;
+    color: #eee;
+    border: 1px solid #444;
+    padding: 3px;
+    font-size: 11px;
+    border-radius: 4px;
+}
