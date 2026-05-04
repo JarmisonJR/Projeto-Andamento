@@ -3,190 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Gestão Escolar v3.0</title>
-    <link rel="icon" type="image/png" href="Governo-do-Ceara.png">
-    <link rel="stylesheet" href="style.css">
+    <title>Technician PRO | Gestão de Manutenção</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-theme">
+    <div id="settings-bar">
+        <button onclick="toggleTheme()" title="Alternar Tema">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+    </div>
 
-    <div id="auth-screen" class="auth-overlay active">
-        <div class="auth-box">
-            <div id="login-form" class="auth-content">
-                <div class="auth-brand">
-                    <div class="logo-icon">🌿</div>
-                    <h1>Bem-vindo</h1>
-                    <p>Acesse com e-mail @gmail.com</p>
-                </div>
-                <div class="form-group">
-                    <label>E-mail</label>
-                    <input type="email" id="login-email" class="auth-input" placeholder="seu-email@gmail.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Senha</label>
-                    <input type="password" id="login-pass" class="auth-input" placeholder="••••••••" required>
-                </div>
-                <button class="btn-primary" onclick="handleLogin()">Entrar no Sistema</button>
-                <p class="auth-switch">Novo por aqui? <a href="javascript:void(0)" onclick="toggleAuth('signup')">Crie uma conta</a></p>
+    <div id="auth-screen" class="screen flex-center">
+        <div class="auth-card animate-in">
+            <div class="auth-header">
+                <div class="logo-circle"><i class="fas fa-bolt"></i></div>
+                <h1 id="auth-title">Technician PRO</h1>
+                <p id="auth-subtitle">Entre para gerenciar sua oficina</p>
             </div>
+            
+            <form id="auth-form" onsubmit="event.preventDefault(); handleAuth();">
+                <div id="register-fields" class="hidden">
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="reg-nome" placeholder="Nome Completo">
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fas fa-id-badge"></i>
+                        <select id="reg-cargo">
+                            <option value="Técnico Master">Técnico Master</option>
+                            <option value="Atendente">Atendente</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
 
-            <div id="signup-form" class="auth-content" style="display: none;">
-                <div class="auth-brand">
-                    <div class="logo-icon">✨</div>
-                    <h1>Cadastro</h1>
-                    <p>Crie sua conta administrativa</p>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="auth-email" placeholder="E-mail" required>
                 </div>
-                <div class="form-group">
-                    <label>Nome Completo</label>
-                    <input type="text" id="reg-nome" class="auth-input" placeholder="Ex: Prof. Silva">
+
+                <div class="input-wrapper">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="auth-pass" placeholder="Senha" required>
+                    <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('auth-pass', this)"></i>
                 </div>
-                <div class="form-group">
-                    <label>E-mail (@gmail.com)</label>
-                    <input type="email" id="reg-email" class="auth-input" placeholder="exemplo@gmail.com">
-                </div>
-                <div class="form-group">
-                    <label>Senha (mín. 6 caracteres)</label>
-                    <input type="password" id="reg-pass" class="auth-input" placeholder="••••••••">
-                </div>
-                <button class="btn-primary" onclick="handleSignup()">Finalizar Cadastro</button>
-                <p class="auth-switch">Já tem conta? <a href="javascript:void(0)" onclick="toggleAuth('login')">Fazer Login</a></p>
-            </div>
+                
+                <button type="submit" class="btn-main" id="btn-submit">Entrar no Sistema</button>
+            </form>
+            
+            <button class="btn-toggle" onclick="toggleAuthMode()" id="auth-toggle">
+                Não tem conta? <span>Cadastre-se</span>
+            </button>
         </div>
     </div>
 
-    <div id="app-content" style="display: none;">
-        <nav class="sidebar">
-            <div class="nav-header">Portal <span>Escolar</span></div>
-            <ul class="nav-links">
-                <li onclick="showSection('menu')">🏠 Menu Inicial</li>
-                <li onclick="showSection('cadastros')">⚙️ Configurar Listas</li>
-            </ul>
-            <button class="logout-btn" onclick="logout()">Sair da Conta</button>
-        </nav>
-
-        <main class="main-viewport">
-            <div id="main-menu" class="app-section active">
-                <header class="section-header">
-                    <h2 id="welcome-user">Olá!</h2>
-                    <p>Selecione uma área para gerenciar:</p>
-                </header>
-                <div class="dashboard-grid">
-                    <div class="stat-card" onclick="openLab('LEI')"><h3>LEI</h3><p>Informática</p></div>
-                    <div class="stat-card" onclick="openLab('Hardware')"><h3>Hardware</h3><p>Manutenção</p></div>
-                    <div class="stat-card" onclick="openLab('Multimídia')"><h3>Multimídia</h3><p>Audiovisual</p></div>
-                    <div class="stat-card" onclick="showSection('monitoria')"><h3>Monitoria</h3><p>Escala de Postos</p></div>
-                </div>
+    <div id="main-layout" class="hidden">
+        <button id="mobile-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-logo">
+                <i class="fas fa-bolt"></i> <span>Technician PRO</span>
             </div>
-
-            <div id="sec-reservas" class="app-section">
-                <div class="section-header">
-                    <button class="back-link" onclick="showSection('menu')">← Voltar</button>
-                    <h2 id="currentLabTitle">Laboratório</h2>
-                </div>
-                <div class="calendar-container">
-                    <button class="btn-toggle-cal" onclick="toggleCalendarView()">📅 Agenda do Laboratório</button>
-                    <div id="calendar-expandable" style="display: none;">
-                        <div class="calendar-controls">
-                            <div class="select-group">
-                                <label>Mês</label>
-                                <select id="reserva-month" onchange="generateCalendar()"></select>
-                            </div>
-                            <div class="select-group">
-                                <label>Ano</label>
-                                <select id="reserva-year" onchange="generateCalendar()"></select>
-                            </div>
-                        </div>
-                        <div class="calendar-weekdays">
-                            <div>DOM</div><div>SEG</div><div>TER</div><div>QUA</div><div>QUI</div><div>SEX</div><div>SÁB</div>
-                        </div>
-                        <div id="calendar-grid" class="calendar-grid"></div>
-                        <p class="calendar-hint">Clique direito para gerenciar feriados ou eventos.</p>
-                    </div>
-                </div>
-                <div class="table-wrapper">
-                    <h3 id="selected-date-label" class="table-date-title">Horários para: --/--/----</h3>
-                    <table>
-                        <thead><tr><th>Horário</th><th>Professor</th><th>Turma</th></tr></thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
-                </div>
+            <nav class="nav-menu">
+                <button onclick="showScreen('home-screen')" class="nav-item active">
+                    <i class="fas fa-home"></i> <span>Início</span>
+                </button>
+                <button onclick="showScreen('cadastro-screen')" class="nav-item">
+                    <i class="fas fa-plus-circle"></i> <span>Novo Registro</span>
+                </button>
+                <button onclick="showScreen('lista-screen')" class="nav-item">
+                    <i class="fas fa-clipboard-list"></i> <span>Ordens</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="nav-item btn-logout">
+                    <i class="fas fa-power-off"></i> <span>Sair da Conta</span>
+                </button>
             </div>
+        </aside>
 
-            <div id="sec-monitoria" class="app-section">
-                <div class="section-header">
-                    <button class="back-link" onclick="showSection('menu')">← Voltar</button>
-                    <h2>🛡️ Escala de Monitoria</h2>
+        <main class="main-content">
+            <section id="home-screen" class="content-section">
+                <div class="welcome-header">
+                    <h2 id="welcome-text">Seja Bem-Vindo!</h2>
+                    <p id="current-date" class="text-muted"></p>
                 </div>
-                <div class="calendar-container">
-                    <div class="calendar-controls">
-                        <div class="select-group">
-                            <label>Mês</label>
-                            <select id="monitoria-month" onchange="generateMonitoriaCalendar()"></select>
-                        </div>
-                        <div class="select-group">
-                            <label>Ano</label>
-                            <select id="monitoria-year" onchange="generateMonitoriaCalendar()"></select>
-                        </div>
-                    </div>
-                    <div class="calendar-weekdays">
-                        <div>DOM</div><div>SEG</div><div>TER</div><div>QUA</div><div>QUI</div><div>SEX</div><div>SÁB</div>
-                    </div>
-                    <div id="monitoria-grid" class="calendar-grid"></div>
+                <div class="welcome-banner">
+                    <h1>Technician PRO <small>v1.0</small></h1>
+                    <p>Gestão profissional para sua assistência técnica.</p>
                 </div>
-                <div class="table-wrapper">
-                    <h3 id="selected-monitoria-date-label" class="schedule-title">Horários para: --/--/----</h3>
+                <div class="stats-grid">
+                    <button class="stat-card" onclick="showScreen('cadastro-screen')">
+                        <div class="stat-icon blue"><i class="fas fa-file-signature"></i></div>
+                        <div><h3>Nova Ordem</h3><p>Abrir chamado</p></div>
+                    </button>
+                    <button class="stat-card" onclick="showScreen('lista-screen')">
+                        <div class="stat-icon yellow"><i class="fas fa-database"></i></div>
+                        <div><h3 id="count-total">0</h3><p>Registros Totais</p></div>
+                    </button>
+                </div>
+            </section>
+
+            <section id="lista-screen" class="content-section hidden">
+                <div class="section-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                    <h2>Ordens de Serviço</h2>
+                    <button onclick="limparBanco()" class="btn-danger">Esvaziar Banco</button>
+                </div>
+                <div class="table-container">
                     <table>
                         <thead>
                             <tr>
-                                <th>POSTO DE TRABALHO</th>
-                                <th>MONITOR RESPONSÁVEL</th>
-                                <th>TURMA</th>
+                                <th>Cliente</th>
+                                <th>Aparelho</th>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
-                        <tbody id="tableBodyMonitoria"></tbody>
+                        <tbody id="table-body"></tbody>
                     </table>
                 </div>
-            </div>
+            </section>
 
-            <div id="sec-cadastros" class="app-section">
-                <div class="section-header">
-                    <button class="back-link" onclick="showSection('menu')">← Voltar</button>
-                    <h2>⚙️ Gestão de Listas</h2>
+            <section id="cadastro-screen" class="content-section hidden">
+                <div class="form-card">
+                    <h2>Nova Ordem</h2>
+                    <form id="serviceForm">
+                        <div class="input-group">
+                            <label>Cliente</label>
+                            <input type="text" id="cli-nome" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Aparelho</label>
+                            <input type="text" id="apa-nome" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Defeito</label>
+                            <textarea id="apa-defeito" required></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Data</label>
+                            <input type="date" id="apa-data" required>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" onclick="showScreen('home-screen')" class="btn-secondary">Cancelar</button>
+                            <button type="submit" class="btn-primary">Salvar Ordem</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="config-grid">
-                    <div class="config-card">
-                        <h3>👨‍🏫 Professores</h3>
-                        <div class="input-action">
-                            <input type="text" id="new-prof" placeholder="Nome do Professor">
-                            <button onclick="cadastrarItem('professores', 'new-prof')">+</button>
-                        </div>
-                        <ul id="list-professores" class="data-list"></ul>
-                    </div>
-                    <div class="config-card">
-                        <h3>👥 Turmas</h3>
-                        <div class="input-action">
-                            <input type="text" id="new-turma" placeholder="Ex: 3º Ano A">
-                            <button onclick="cadastrarItem('turmas', 'new-turma')">+</button>
-                        </div>
-                        <ul id="list-turmas" class="data-list"></ul>
-                    </div>
-                    <div class="config-card">
-                        <h3>🎓 Monitores</h3>
-                        <div class="input-action">
-                            <input type="text" id="new-monitor" placeholder="Nome do Aluno">
-                            <button onclick="cadastrarItem('monitores', 'new-monitor')">+</button>
-                        </div>
-                        <ul id="list-monitores" class="data-list"></ul>
-                    </div>
-                </div>
-            </div>
+            </section>
         </main>
     </div>
 
-    <div id="custom-menu" style="position: absolute; background: #1f2937; border: 1px solid #374151; border-radius: 8px; display: none; z-index: 9999; box-shadow: 0 4px 15px rgba(0,0,0,0.5); width: 160px;">
-        <div style="padding: 10px; color: white; cursor: pointer; border-bottom: 1px solid #374151;" onclick="applyStatus('feriado')">🚩 Feriado</div>
-        <div style="padding: 10px; color: white; cursor: pointer; border-bottom: 1px solid #374151;" onclick="applyStatus('evento')">📅 Evento</div>
-        <div style="padding: 10px; color: white; cursor: pointer;" onclick="applyStatus('letivo')">📖 Dia Letivo</div>
+    <div id="custom-confirm" class="modal-overlay hidden">
+        <div class="confirm-card">
+            <div class="confirm-icon"><i class="fas fa-exclamation-triangle" id="modal-icon"></i></div>
+            <h3 id="confirm-title">Atenção</h3>
+            <p id="confirm-message"></p>
+            <div class="confirm-buttons">
+                <button id="confirm-no" class="btn-secondary" onclick="closeConfirm()">Cancelar</button>
+                <button id="confirm-yes" class="btn-danger-confirm">Sim, Confirmar</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
